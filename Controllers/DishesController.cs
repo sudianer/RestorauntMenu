@@ -20,12 +20,12 @@ namespace RestorauntMenu.Controllers
 
         public ViewResult List()
         {
-            DishesListViewModel Dvm = new DishesListViewModel()
-            {
-                AllDishes = _dishes.Dishes
-            };
+            //DishesListViewModel Dvm = new DishesListViewModel()
+            //{
+            //    AllDishes = _dishes.Dishes
+            //};
             
-            return View(Dvm);
+            return View(_dishes.Dishes);
         }
     }
 }

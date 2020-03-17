@@ -2,7 +2,7 @@
 <h3>Our menu</h3>
 <div class="row mt-5 mb-2">
     @{
-        foreach (var dish in Model.AllDishes)
+        foreach (var dish in Model)
         {
             <div>
                 <img class="img-thumbnail" src="@dish.Img" width="250" height="200" alt="@dish.Title">
