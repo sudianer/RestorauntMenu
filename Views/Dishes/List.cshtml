@@ -1,12 +1,16 @@
-﻿
-<h2>Bla resto</h2>
-@{
-    foreach (var dish in Model.AllDishes)
-    {
-        <div>
-            <h2>Title: @dish.Title</h2>
-            <p>Price: @dish.Price.ToString("c")</p>
-            <p>Ingredients: @dish.Ingredients</p>
-        </div>
+﻿<h1>Family restoraunt</h1>
+<h3>Our menu</h3>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var dish in Model.AllDishes)
+        {
+            <div>
+                <img class="img-thumbnail" src="@dish.Img" alt="@dish.Title">
+                <h2>Title: @dish.Title</h2>
+                <p>Price: @dish.Price.ToString("c")</p>
+                <p>Ingredients: @dish.Ingredients</p>
+                <p><a class="btn btn-warning" href="#">Подробнее</a></p>
+            </div>
+        }
     }
-}
+</div>

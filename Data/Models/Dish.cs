@@ -16,6 +16,7 @@ namespace RestorauntMenu.Data.Models
         public int Weight { get; set; }
         public int Calories { get; set; }
         public int TimeToMake { get; set; }
+        public string Img { get; set; }
      
     }
 }
