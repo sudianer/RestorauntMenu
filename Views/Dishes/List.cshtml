@@ -5,7 +5,7 @@
         foreach (var dish in Model.AllDishes)
         {
             <div>
-                <img class="img-thumbnail" src="@dish.Img" alt="@dish.Title">
+                <img class="img-thumbnail" src="@dish.Img" width="250" height="200" alt="@dish.Title">
                 <h2>Title: @dish.Title</h2>
                 <p>Price: @dish.Price.ToString("c")</p>
                 <p>Ingredients: @dish.Ingredients</p>

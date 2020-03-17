@@ -32,10 +32,30 @@ namespace RestorauntMenu.Data.Mocks
                         Ingredients = "pasta, beef, tomato sauce",
                         Calories = 400,
                         Description="famous italian pasta",
-                        Img = "/img/bolognese-meat-sauce-LEAD-1.jpg",
+                        Img = "/img/pasta-bolognese.jpg",
                         TimeToMake = 10,
                         Weight = 350
-                    }
+                    },
+                    new Dish {
+                        Title = "Fetuchine alfredo",
+                        Price = 300,
+                        Ingredients = "pasta, cheese, butter",
+                        Calories = 400,
+                        Description="",
+                        Img = "/img/fettucine-alfredo.jpg",
+                        TimeToMake = 10,
+                        Weight = 300
+                    },
+                    new Dish {
+                        Title = "ribeye steak",
+                        Price = 300,
+                        Ingredients = "beef, pepper, salt",
+                        Calories = 400,
+                        Description="",
+                        Img = "/img/ribeye-steak.jpg",
+                        TimeToMake = 10,
+                        Weight = 300
+                    },
                 };
             }
         }
