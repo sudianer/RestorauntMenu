@@ -1,0 +1,12 @@
+﻿
+<h2>Bla resto</h2>
+@{
+    foreach (var dish in Model.AllDishes)
+    {
+        <div>
+            <h2>Title: @dish.Title</h2>
+            <p>Price: @dish.Price.ToString("c")</p>
+            <p>Ingredients: @dish.Ingredients</p>
+        </div>
+    }
+}
