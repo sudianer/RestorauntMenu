@@ -12,6 +12,7 @@ using RestorauntMenu.Data;
 using RestorauntMenu.Data.Interfaces;
 using RestorauntMenu.Data.Mocks;
 using Microsoft.EntityFrameworkCore;
+using RestorauntMenu.Data.Repository;
 
 namespace RestorauntMenu
 {
@@ -29,7 +30,7 @@ namespace RestorauntMenu
         {
             
             services.AddDbContext<AppDbContent>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IDishes, MockDishes>();
+            services.AddTransient<IDishes, DishRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
         }
@@ -40,7 +41,8 @@ namespace RestorauntMenu
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();     
+            app.UseMvcWithDefaultRoute();
+            DbObject.Initial(app);
         }
     }
 }
