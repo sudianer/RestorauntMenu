@@ -42,7 +42,14 @@ namespace RestorauntMenu
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-            DbObject.Initial(app);
+
+           
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                AppDbContent content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
+                DbObject.Initial(content);
+            }
+            
         }
     }
 }
