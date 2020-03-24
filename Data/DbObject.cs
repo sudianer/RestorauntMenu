@@ -10,12 +10,13 @@ namespace RestorauntMenu.Data
 {
     public class DbObject
     {
-        public static void Initial(IApplicationBuilder app) 
+        public static void Initial(IApplicationBuilder app)
         {
-            AppDbContent DbContent = app.ApplicationServices.GetRequiredService<AppDbContent>();
-                
-            
-
+            AppDbContent content = app.ApplicationServices.GetRequiredService<AppDbContent>();
+        
+        
         }
+
+        public static Dictionary<>
     }
 }

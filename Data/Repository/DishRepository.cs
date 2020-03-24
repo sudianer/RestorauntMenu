@@ -10,16 +10,16 @@ namespace RestorauntMenu.Data.Repository
 {
     public class DishRepository : IDishes
     {
-        private readonly AppDbContent DbContent;
+        private readonly AppDbContent AppDbContent;
 
         public DishRepository(AppDbContent appContent)
         {
-            DbContent = appContent;
+            AppDbContent = appContent;
         }
 
 
-        public IEnumerable<Dish> Dishes => DbContent.Dish;
-        public Dish GetDish(int DishId) => DbContent.Dish.FirstOrDefault(p => p.Id == DishId);
+        public IEnumerable<Dish> Dishes => AppDbContent.Dish;
+        public Dish GetDish(int DishId) => AppDbContent.Dish.FirstOrDefault(p => p.Id == DishId);
         
     }
 }
