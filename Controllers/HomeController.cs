@@ -8,6 +8,9 @@ using RestorauntMenu.ViewModels;
 
 namespace RestorauntMenu.Controllers
 {
+    /// <summary>
+    /// Контроллер главной страницы
+    /// </summary>
     public class HomeController: Controller
     {
         private IDishes _dishes;

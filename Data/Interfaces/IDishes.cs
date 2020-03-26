@@ -19,5 +19,6 @@ namespace RestorauntMenu.Data.Interfaces
         /// <param name="DishId">Id искомого блюда</param>
         /// <returns></returns>
         Dish GetDish(int DishId);
+        Dish AddDish(Dish dish);
     }
 }
