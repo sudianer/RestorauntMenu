@@ -13,18 +13,13 @@ namespace RestorauntMenu.Controllers
     {
         private readonly IDishes _dishes;
 
-        public DishesController(IDishes dish)
+        public DishesController(IDishes dishes)
         {
-            _dishes = dish;
+            _dishes = dishes;
         }
 
         public ViewResult List()
         {
-            //DishesListViewModel Dvm = new DishesListViewModel()
-            //{
-            //    AllDishes = _dishes.Dishes
-            //};
-            
             return View(_dishes.Dishes);
         }
     }

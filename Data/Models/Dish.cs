@@ -5,8 +5,13 @@ using System.Threading.Tasks;
 
 namespace RestorauntMenu.Data.Models
 {
+    /// <summary>
+    /// Блюдо в ресторане
+    /// </summary>
     public class Dish
     {
+
+
         public int Id { get; set; }
         public string CreationDate { get; }
         public string Title { get; set; }

@@ -1,0 +1,9 @@
+﻿@model Dish
+
+<div>
+    <img class="img-thumbnail" src="@Model.Img" width="250" height="200" alt="@Model.Title">
+    <h2>Title: @Model.Title</h2>
+    <p>Price: @Model.Price.ToString("c")</p>
+    <p>Ingredients: @Model.Ingredients</p>
+    <p><a class="btn btn-warning" href="#">Подробнее</a></p>
+</div>
