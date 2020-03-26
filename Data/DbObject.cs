@@ -10,12 +10,12 @@ namespace RestorauntMenu.Data
 {
     public class DbObject
     {
-        public static void Initial(AppDbContent content)
+        public static void Initialize(AppDbContext context)
         {
             
-            if (!content.Dish.Any())
+            if (!context.Dish.Any())
             {
-                content.AddRange(
+                context.Dish.AddRange(
                     new Dish
                     {
                         Title = "Carbonara",
@@ -62,7 +62,7 @@ namespace RestorauntMenu.Data
                 );
             }
 
-            content.SaveChanges();
+            context.SaveChanges();
         }
 
        

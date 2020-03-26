@@ -8,7 +8,7 @@ using RestorauntMenu.Data;
 
 namespace RestorauntMenu.Migrations
 {
-    [DbContext(typeof(AppDbContent))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20200319075642_Initial")]
     partial class Initial
     {

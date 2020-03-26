@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace RestorauntMenu.Data
 {
-    public class AppDbContent: DbContext
+    public class AppDbContext: DbContext
     {
-        public AppDbContent(DbContextOptions<AppDbContent> options): base(options)
-        {
-        }
 
         public DbSet<Dish> Dish { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+       
     }
 }

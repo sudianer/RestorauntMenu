@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestorauntMenu.Data.Interfaces;
 using RestorauntMenu.ViewModels;
+using RestorauntMenu.Data;
 
 namespace RestorauntMenu.Controllers
 {
@@ -14,19 +15,15 @@ namespace RestorauntMenu.Controllers
     public class HomeController: Controller
     {
         private IDishes _dishes;
-
-        public HomeController(IDishes dishes)
+        AppDbContext _db;
+        public HomeController(AppDbContext db)
         {
-            _dishes = dishes;
+            _db = db;        
         }
 
         public ViewResult Index()
         {
-            var homeCars = new HomeViewModel
-            {
-                dishes = _dishes.Dishes
-            };
-            return View(_dishes.Dishes);
+            return View(_db.Dish.ToList());
         }
 
     }

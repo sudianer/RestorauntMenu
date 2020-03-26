@@ -7,7 +7,7 @@ using RestorauntMenu.Data;
 
 namespace RestorauntMenu.Migrations
 {
-    [DbContext(typeof(AppDbContent))]
+    [DbContext(typeof(AppDbContext))]
     partial class AppDbContentModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

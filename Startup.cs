@@ -13,6 +13,7 @@ using RestorauntMenu.Data.Interfaces;
 using RestorauntMenu.Data.Mocks;
 using Microsoft.EntityFrameworkCore;
 using RestorauntMenu.Data.Repository;
+using System.Configuration;
 
 namespace RestorauntMenu
 {
@@ -21,15 +22,15 @@ namespace RestorauntMenu
         private IConfigurationRoot _confString;
 
         public Startup(IWebHostEnvironment hostEnv)
-        {
+        {   
             _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddDbContext<AppDbContent>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
+           
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
             services.AddTransient<IDishes, DishRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
@@ -46,8 +47,8 @@ namespace RestorauntMenu
            
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                AppDbContent content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
-                DbObject.Initial(content);
+                AppDbContext context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                DbObject.Initialize(context);
             }
             
         }

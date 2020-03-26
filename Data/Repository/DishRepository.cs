@@ -10,9 +10,9 @@ namespace RestorauntMenu.Data.Repository
 {
     public class DishRepository : IDishes
     {
-        private readonly AppDbContent AppDbContent;
+        private readonly AppDbContext AppDbContent;
 
-        public DishRepository(AppDbContent appContent)
+        public DishRepository(AppDbContext appContent)
         {
             AppDbContent = appContent;
         }
