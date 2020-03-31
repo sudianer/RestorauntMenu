@@ -1,10 +1,19 @@
 ﻿<h1>Family restoraunt</h1>
 <h3>Our menu</h3>
-<div class="row mt-5 mb-4">
-    @{
-        foreach (Dish dish in Model)
-        {
-            @Html.Partial("AllDishes", dish)
-        }
+@model IEnumerable<RestorauntMenu.Data.Models.Dish>
+@{
+    ViewBag.Title = "Меню";
+}
+<a asp-action="Create">Добавить блюдо</a>
+<table class="table">    
+   
+    @foreach (var dish in Model)
+    {
+        
+        <tr><td>
+            <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id">Подробнее</a> |
+            <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id">Изменить</a> |
+            <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id">Удалить</a>
+        </td></tr>
     }
-</div>
+</table>
