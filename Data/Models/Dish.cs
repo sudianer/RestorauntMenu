@@ -25,6 +25,10 @@ namespace RestorauntMenu.Data.Models
         [Display(Name = "Описание")]
         [StringLength(100)]
         [Required(ErrorMessage = "Длина описания не менее 1 символа")]
-        public string Description { get; set; }       
+        public string Description { get; set; }
+        [Display(Name = "Цена")]
+        [DataType(DataType.Currency, ErrorMessage = "Must be a Decimal!")]
+        [Required(ErrorMessage = "Длина цены не менее 1 символа")]
+        public decimal Price { get; set; }
     }
 }

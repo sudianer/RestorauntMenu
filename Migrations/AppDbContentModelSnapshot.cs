@@ -31,6 +31,9 @@ namespace RestorauntMenu.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Price")
+                        .HasColumnType("decimal");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 

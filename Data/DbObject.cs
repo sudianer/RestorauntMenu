@@ -20,7 +20,9 @@ namespace RestorauntMenu.Data
                     {
                         Title = "test",
                         Description = "test",
-                        Ingredients ="test"
+                        Ingredients ="test",
+                        Price = 300.0m
+                        
                     }
                 );
             }           

@@ -15,6 +15,7 @@ namespace RestorauntMenu.Migrations
                     Title = table.Column<string>(nullable: true),
                     Ingredients = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: true),
                 },
                 constraints: table =>
                 {
