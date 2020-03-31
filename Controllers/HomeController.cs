@@ -64,7 +64,12 @@ namespace RestorauntMenu.Controllers
             }
             return NotFound();
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> Details()
+        {
+            return RedirectToAction("Index");
+        }
+
         /// <summary>
         /// Показывает форму редактирования объекта
         /// </summary>

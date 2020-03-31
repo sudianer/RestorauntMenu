@@ -16,10 +16,14 @@ namespace RestorauntMenu.Data
             if (!context.Dish.Any())
             {
                 context.Dish.AddRange(
-
+                    new Dish()
+                    {
+                        Title = "test",
+                        Description = "test",
+                        Ingredients ="test"
+                    }
                 );
-            }
-
+            }           
             context.SaveChanges();
         }
 

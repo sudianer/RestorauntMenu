@@ -20,10 +20,5 @@ namespace RestorauntMenu.Data.Repository
 
         public IEnumerable<Dish> Dishes => AppDbContent.Dish;
         public Dish GetDish(int DishId) => AppDbContent.Dish.FirstOrDefault(p => p.Id == DishId);
-
-        public Dish AddDish(Dish dish)
-        {
-            throw new NotImplementedException();
-        }  
     }
 }
