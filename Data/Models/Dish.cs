@@ -14,9 +14,6 @@ namespace RestorauntMenu.Data.Models
     {
         [BindNever]
         public int Id { get; set; }
-        [BindNever]
-        [ScaffoldColumn(false)]
-        public string CreationDate { get; }
         [Display(Name = "Название")]
         [StringLength(40)]
         [Required(ErrorMessage = "Длина названия не менее 4 символов")]
@@ -28,22 +25,6 @@ namespace RestorauntMenu.Data.Models
         [Display(Name = "Описание")]
         [StringLength(100)]
         [Required(ErrorMessage = "Длина описания не менее 1 символа")]
-        public string Description { get; set; }
-        [Display(Name = "Цена")]
-        [StringLength(100)]
-        [Required(ErrorMessage = "Длина цены не менее 1 символа")]
-        public double Price { get; set; }
-        [Display(Name = "Вес")]
-        [StringLength(10)]
-        [Required(ErrorMessage = "Длина веса не менее 1 символа")]
-        public int Weight { get; set; }
-        [Display(Name = "Калории")]
-        [StringLength(10)]
-        [Required(ErrorMessage = "Длина калорий не менее 1 символа")]
-        public int Calories { get; set; }
-        [Display(Name = "Время приготовления")]
-        [StringLength(10)]
-        [Required(ErrorMessage = "Длина времени приготовления не менее 1 символа")]
-        public int TimeToMake { get; set; }
+        public string Description { get; set; }       
     }
 }

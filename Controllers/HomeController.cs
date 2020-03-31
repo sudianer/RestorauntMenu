@@ -26,10 +26,21 @@ namespace RestorauntMenu.Controllers
         {
             return View(await _db.Dish.ToListAsync());
         }
+
+        //TODO: Валидация ввода при создании/изменении
+        /// <summary>
+        /// Возвращает вьюшку создания нового блюда
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
+        /// <summary>
+        /// Обновляет бд, добавляя новое блюдо
+        /// </summary>
+        /// <param name="Dish"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Create(Dish Dish)
         {
@@ -83,7 +94,41 @@ namespace RestorauntMenu.Controllers
             return RedirectToAction("Index");
         }
 
-    
+        /// <summary>
+        /// Вызывает вьюшку удаления
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("Delete")]
+        public async Task<IActionResult> ConfirmDelete(int? id)
+        {
+            if(id != null)
+            {
+                Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
+                if (dish != null)
+                    return View(dish);
+            }
+            return NotFound();
+        }
+
+        /// <summary>
+        /// находит и удаляет блюдо из базы данных по id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id != null)
+            {
+                Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
+                _db.Entry(dish).State = EntityState.Deleted;
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");  
+            }
+            return NotFound();
+        }
     
     
     }

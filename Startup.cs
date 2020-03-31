@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RestorauntMenu.Data;
 using RestorauntMenu.Data.Interfaces;
-using RestorauntMenu.Data.Mocks;
 using Microsoft.EntityFrameworkCore;
 using RestorauntMenu.Data.Repository;
 using System.Configuration;
