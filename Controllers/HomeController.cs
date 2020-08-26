@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RestorauntMenu.Data.Interfaces;
-using RestorauntMenu.ViewModels;
 using RestorauntMenu.Data;
 using Microsoft.EntityFrameworkCore;
 using RestorauntMenu.Data.Models;
@@ -28,6 +27,8 @@ namespace RestorauntMenu.Controllers
         }
 
         //TODO: Валидация ввода при создании/изменении
+        //TODO: Проверка уникальности названия
+        //TODO: Нормальная работа с БД
         /// <summary>
         /// Возвращает вьюшку создания нового блюда
         /// </summary>

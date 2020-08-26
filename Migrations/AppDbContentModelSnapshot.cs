@@ -34,6 +34,9 @@ namespace RestorauntMenu.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("decimal");
 
+                    b.Property<string>("TimeToMake")
+                       .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 

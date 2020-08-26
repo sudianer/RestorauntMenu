@@ -19,9 +19,11 @@ namespace RestorauntMenu.Data
                     new Dish()
                     {
                         Title = "test",
-                        Description = "test",
+                        Description = "not test",
                         Ingredients ="test",
-                        Price = 300.0m
+                        Price = 300.0m,
+                        TimeToMake = 15
+
                         
                     }
                 );

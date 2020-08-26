@@ -17,6 +17,7 @@ namespace RestorauntMenu.Data.Models
         [Display(Name = "Название")]
         [StringLength(40)]
         [Required(ErrorMessage = "Длина названия не менее 4 символов")]
+        
         public string Title { get; set; }
         [Display(Name = "Состав")]
         [StringLength(120)]
@@ -30,5 +31,11 @@ namespace RestorauntMenu.Data.Models
         [DataType(DataType.Currency, ErrorMessage = "Must be a Decimal!")]
         [Required(ErrorMessage = "Длина цены не менее 1 символа")]
         public decimal Price { get; set; }
+        [Display(Name = "Время приготовления")]
+        [MinLength(1)]
+        [Required(ErrorMessage = "Длина времени приготовления не менее 1 символа!")]
+        public int TimeToMake { get; set; }
+
+
     }
 }

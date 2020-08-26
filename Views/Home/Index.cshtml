@@ -6,10 +6,10 @@
 }
 <a asp-action="Create">Добавить блюдо</a>
 <table class="table">    
-    <tr><td>Название</td><td>Состав</td><td>Стоимость</td></tr>
+    <tr><td>Название</td><td>Состав</td><td>Стоимость</td><td>Время приготовления</td><td>Описание</td></tr>
     @foreach (var dish in Model)
     {
-        <tr><td>@dish.Title</td><td>@dish.Ingredients</td><td>@dish.Price</td></tr>
+        <tr><td>@dish.Title</td><td>@dish.Ingredients</td><td>@dish.Price</td><td>@dish.TimeToMake</td><td>@dish.Description</td></tr>
         
         <tr><td>
             <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id">Подробнее</a> |
