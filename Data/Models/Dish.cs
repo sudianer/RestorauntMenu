@@ -36,5 +36,8 @@ namespace RestorauntMenu.Data.Models
         [Display(Name = "Время приготовления")]
         [Required(ErrorMessage = "Длина времени приготовления не менее 1 символа!")]
         public int TimeToMake { get; set; }
+
+        [Display(Name = "Дата создания")]     
+        public DateTime CreationDate { get; set; }
     }
 }
