@@ -40,8 +40,8 @@ namespace RestorauntMenu.Data.Models
         [Required(ErrorMessage = "Длина времени приготовления не менее 1 символа!")]
         public int TimeToMake { get; set; }
 
-        [Display(Name = "Дата создания")]  
-        [DataType(DataType.Date)]   
+        [Display(Name = "Дата создания")]
+        [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
     }
 }

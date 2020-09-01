@@ -47,6 +47,7 @@ namespace RestorauntMenu.Controllers
         public async Task<IActionResult> Create(Dish Dish)
         {
             Dish.CreationDate = DateTime.Now;
+            _db.Dish.Attach(Dish);
             _db.Dish.Add(Dish);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -85,7 +86,7 @@ namespace RestorauntMenu.Controllers
             {
                 Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
                 if (dish != null)
-                {
+                {                   
                     return View(dish); //при передаче блюда в метод EditDish, сбрасывается дата-время
                 }
             }
@@ -101,6 +102,7 @@ namespace RestorauntMenu.Controllers
         [HttpPost]
         public async Task<IActionResult> EditDish(Dish dish)
         {
+            DateTime date = dish.CreationDate;
             _db.Dish.Update(dish);         
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");

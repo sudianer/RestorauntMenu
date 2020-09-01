@@ -18,8 +18,6 @@ namespace RestorauntMenu.Data
                
             }           
             context.SaveChanges();
-        }
-
-       
+        }       
     }
 }
