@@ -30,7 +30,6 @@ namespace RestorauntMenu.Controllers
         //TODO: Валидация ввода при создании/изменении
         //TODO: Проверка уникальности названия
         //TODO: Нормальная работа с БД
-        //TODO: TimeToMake сошел с ума и при создании из вьюшки думает, что он не int
         /// <summary>
         /// Возвращает вьюшку создания нового блюда
         /// </summary>
@@ -47,6 +46,7 @@ namespace RestorauntMenu.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Dish Dish)
         {
+            Dish.CreationDate = DateTime.Now;
             _db.Dish.Add(Dish);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -78,20 +78,21 @@ namespace RestorauntMenu.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>  
+       
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
             {
                 Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
                 if (dish != null)
-                {                  
-                    return View(dish);
+                {
+                    return View(dish); //при передаче блюда в метод EditDish, сбрасывается дата-время
                 }
             }
             return NotFound();
         }
 
-        //TODO: Метод вместо обновления строки добавляет новую, непорядок
+        //TODO: При сохранении изменений, меняется и дата создания на 01.01.0001, время так же сбрасывается в 00:00
         /// <summary>
         /// обновляет объект в базе данных
         /// </summary>
@@ -100,7 +101,7 @@ namespace RestorauntMenu.Controllers
         [HttpPost]
         public async Task<IActionResult> EditDish(Dish dish)
         {
-            _db.Dish.Update(dish);
+            _db.Dish.Update(dish);         
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

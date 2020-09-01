@@ -6,15 +6,15 @@
 }
 <a asp-action="Create">Добавить блюдо</a>
 <table class="table">    
-    <tr><td>Название</td><td>Состав</td><td>Стоимость</td><td>Время приготовления</td><td>Описание</td></tr>
+    <tr><td>Дата создания</td><td>Название</td><td>Состав</td><td>Стоимость</td><td>Время приготовления</td><td>Описание</td></tr>
     @foreach (var dish in Model)
     {
-        <tr><td>@dish.Title</td><td>@dish.Ingredients</td><td>@dish.Price</td><td>@dish.TimeToMake</td><td>@dish.Description</td></tr>
+        <tr><td>@dish.CreationDate</td><td>@dish.Title</td><td>@dish.Ingredients</td><td>@dish.Price</td><td>@dish.TimeToMake</td><td>@dish.Description</td></tr>
         
         <tr><td>
-            <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id">Подробнее</a> |
-            <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id">Изменить</a> |
-            <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id">Удалить</a>
+            <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Details.png" width="25" height="25"></a> |
+            <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Edit.png" width="25" height="25"></a> |
+            <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Delete.png" width="25" height="25"></a>
         </td></tr>
     }
 </table>

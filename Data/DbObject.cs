@@ -15,18 +15,7 @@ namespace RestorauntMenu.Data
             
             if (!context.Dish.Any())
             {
-                context.Dish.AddRange(
-                    new Dish()
-                    {
-                        Title = "test",
-                        Description = "not test",
-                        Ingredients ="test",
-                        Price = 300.0m,
-                        TimeToMake = 15
-
-                        
-                    }
-                );
+               
             }           
             context.SaveChanges();
         }

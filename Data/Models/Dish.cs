@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,10 +36,12 @@ namespace RestorauntMenu.Data.Models
         public decimal Price { get; set; }
 
         [Display(Name = "Время приготовления")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "Длина времени приготовления не менее 1 символа!")]
         public int TimeToMake { get; set; }
 
-        [Display(Name = "Дата создания")]     
+        [Display(Name = "Дата создания")]  
+        [DataType(DataType.Date)]   
         public DateTime CreationDate { get; set; }
     }
 }
