@@ -22,9 +22,46 @@ namespace RestorauntMenu.Controllers
             _db = db;        
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await _db.Dish.ToListAsync());
+        public async Task<IActionResult> Index(string sortOrder)
+        {           
+            var dishes = from s in _db.Dish
+                           select s;
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    dishes = dishes.OrderByDescending(p => p.Title);
+                    break;
+                case "title":
+                    dishes = dishes.OrderBy(p => p.Title);
+                    break;
+
+                case "date_desc":
+                    dishes = dishes.OrderByDescending(p => p.CreationDate);
+                    break;
+                case "date":
+                    dishes = dishes.OrderBy(p => p.CreationDate);
+                    break;
+
+                case "cost_desc":
+                    dishes = dishes.OrderByDescending(p => p.CreationDate);
+                    break;
+                case "cost":
+                    dishes = dishes.OrderBy(p => p.CreationDate);
+                    break;
+
+                case "id_desc":
+                    dishes = dishes.OrderByDescending(p => p.Id);
+                    break;
+                case "id":
+                    dishes = dishes.OrderBy(p => p.Id);
+                    break;
+
+                default:
+                    dishes = dishes.OrderBy(p => p.Title);
+                    break;
+            }
+
+            return View(dishes);
         }
 
         //TODO: Валидация ввода при создании/изменении
