@@ -22,10 +22,26 @@ namespace RestorauntMenu.Controllers
             _db = db;        
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
-        {           
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        {
+            ViewData["CurrentFilter"] = searchString;
+
             var dishes = from s in _db.Dish
                            select s;
+
+            ViewData["totalCount_dishes"] = dishes.Count();
+
+            if (!String.IsNullOrEmpty(searchString)) 
+            {
+                dishes = dishes.Where(s => s.Title.Contains(searchString)
+                                       || s.Ingredients.Contains(searchString)
+                                       || s.Description.Contains(searchString)
+                                       || s.Id.ToString().Contains(searchString)
+                                       || s.Price.ToString().Contains(searchString)
+                                       || s.CreationDate.ToString().Contains(searchString)
+                                       || s.TimeToMake.ToString().Contains(searchString) );
+            }
+
             switch (sortOrder)
             {
                 case "title_desc":
