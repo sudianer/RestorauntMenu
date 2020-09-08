@@ -72,6 +72,27 @@ namespace RestorauntMenu.Controllers
                     dishes = dishes.OrderBy(p => p.Id);
                     break;
 
+                case "weight_desc":
+                    dishes = dishes.OrderByDescending(p => p.Id);
+                    break;
+                case "weight":
+                    dishes = dishes.OrderBy(p => p.Id);
+                    break;
+
+                case "calories_desc":
+                    dishes = dishes.OrderByDescending(p => p.Id);
+                    break;
+                case "calories":
+                    dishes = dishes.OrderBy(p => p.Id);
+                    break;
+
+                case "timeToMake_desc":
+                    dishes = dishes.OrderByDescending(p => p.Id);
+                    break;
+                case "timeToMake":
+                    dishes = dishes.OrderBy(p => p.Id);
+                    break;
+
                 default:
                     dishes = dishes.OrderBy(p => p.Title);
                     break;
@@ -146,7 +167,6 @@ namespace RestorauntMenu.Controllers
             return NotFound();
         }
 
-        //TODO: При сохранении изменений, меняется и дата создания на 01.01.0001, время так же сбрасывается в 00:00
         /// <summary>
         /// обновляет объект в базе данных
         /// </summary>
@@ -162,42 +182,41 @@ namespace RestorauntMenu.Controllers
         }
 
         /// <summary>
-        /// Вызывает вьюшку удаления
+        /// Удаляет блюдо
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
         [ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? id)
-        {
-            if(id != null)
-            {
-                Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
-                if (dish != null)
-                    return View(dish);
-            }
-            return NotFound();
-        }
-
-        /// <summary>
-        /// находит и удаляет блюдо из базы данных по id 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> Delete(int? id)
+        [HttpGet]
+        public async Task<IActionResult> DeleteDish(int? id)
         {
             if (id != null)
             {
                 Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
                 _db.Entry(dish).State = EntityState.Deleted;
                 await _db.SaveChangesAsync();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
             return NotFound();
+        } 
+
+
+        /// <summary>
+        /// Проверяет уникальность введенного названия
+        /// </summary>
+        /// <param name="title">Проверяемое название</param>
+        /// <returns></returns>
+        public async Task<IActionResult> IsTitleUnique(string title, string prevAction,string nextAction)
+        {
+            foreach(Dish dish in _db.Dish.ToList())
+            {
+                if (dish.Title == title)
+                {
+                    return RedirectToAction(prevAction);
+                }
+            }
+            return RedirectToAction(nextAction);
         }
-    
-    
     }
 
 

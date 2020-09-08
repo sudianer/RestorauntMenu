@@ -2,21 +2,21 @@
 <h3>Our menu</h3>
 @model IEnumerable<RestorauntMenu.Data.Models.Dish>
 @{
-    ViewBag.Title = "Меню";;    
+    ViewBag.Title = "Меню"; ;
 }
 <a asp-action="Create">Добавить блюдо</a>
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Поиск: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]"/>
-            <input type="submit" value="Искать" class="btn btn-default"/> |
+            Поиск: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Искать" class="btn btn-default" /> |
             <label>@Model.Count() Элемент(а\ов) из @ViewData["totalCount_dishes"]</label>
         </p>
     </div>
 </form>
-    
 
-<table class="table">    
+
+<table class="table">
     <thead>
         <tr>
             <th>Действия</th>
@@ -36,32 +36,55 @@
                 <a asp-action="Index" asp-route-sortOrder="title_desc"><img src="~/img/Down.png" width=10 height=10></a>
             </th>
             <th>Состав</th>
+            <th>Описание</th>
             <th nowrap>
-                Стоимость
+                Цена
                 <a asp-action="Index" asp-route-sortOrder="cost"><img src="~/img/Up.png" width=10 height=10></a>
                 <a asp-action="Index" asp-route-sortOrder="cost_desc"><img src="~/img/Down.png" width=10 height=10></a>
             </th>
-            <th>Время приготовления</th>
-            <th>Описание</th>
+            <th nowrap>
+                Граммовка
+                <a asp-action="Index" asp-route-sortOrder="weight"><img src="~/img/Up.png" width=10 height=10></a>
+                <a asp-action="Index" asp-route-sortOrder="weight_desc"><img src="~/img/Down.png" width=10 height=10></a>
+            </th>
+            <th nowrap>
+                Калорийнось
+                <a asp-action="Index" asp-route-sortOrder="calories"><img src="~/img/Up.png" width=10 height=10></a>
+                <a asp-action="Index" asp-route-sortOrder="calories_desc"><img src="~/img/Down.png" width=10 height=10></a>
+            </th>
+            <th nowrap>
+                Время
+                приготовления
+                <a asp-action="Index" asp-route-sortOrder="timeToMake"><img src="~/img/Up.png" width=10 height=10></a>
+                <a asp-action="Index" asp-route-sortOrder="timeToMake_desc"><img src="~/img/Down.png" width=10 height=10></a>
+            </th>
+
         </tr>
     </thead>
     <tbody>
         @foreach (var dish in Model)
         {
-            <tr>
-                <td nowrap>
-                    <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Details.png" width="25" height="25"></a>|
-                    <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Edit.png" width="25" height="25"></a>|
-                    <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Delete.png" width="25" height="25"></a>
-                </td>
-                <td>@dish.Id</td>
-                <td>@dish.CreationDate</td>
-                <td>@dish.Title</td>
-                <td>@dish.Ingredients</td>
-                <td>@dish.Price</td>
-                <td>@dish.TimeToMake</td>
-                <td>@dish.Description</td>
-            </tr>
+        <tr>
+            <td nowrap>
+                <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Details.png" width="25" height="25"></a>|
+                <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Edit.png" width="25" height="25"></a>|
+                <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id" onclick="return confirm('Удалить?')">
+                    <img src="~/img/Delete.png" width="25" height="25">
+                </a>
+
+                @*<a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id" onclick="return confirm("Удалить?")"><img src="~/img/Delete.png" width="25" height="25"></a>*@
+            </td>
+            <td>@dish.Id</td>
+            <td>@dish.CreationDate</td>
+            <td>@dish.Title</td>
+            <td>@dish.Ingredients</td>
+            <td>@dish.Description</td>
+            <td>@dish.Price</td>
+            <td>@dish.Weight</td>
+            <td>@(dish.Calories*dish.Weight/100)</td>
+            <td>@(dish.TimeToMake/60) час(а) @(dish.TimeToMake%60) минут</td>
+
+        </tr>
         }
     </tbody>
 </table>

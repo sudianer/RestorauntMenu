@@ -14,14 +14,8 @@ namespace RestorauntMenu.Data.Mocks
             get
             {
                 return new List<Dish>
-                {
-                    new Dish {
-                        Title = "Carbonara",
-                        Ingredients = "pasta, cheese, bacon, eggs",
-                        Description="most popular pasta in our menu",                      
-                    },
-
-                    
+                {      
+                   
                 };
             }
         }
