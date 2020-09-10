@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace RestorauntMenu.Data.Models
 {
@@ -36,6 +37,7 @@ namespace RestorauntMenu.Data.Models
         [Display(Name = "Цена")]
         [Range(1, 100000000)]
         [Required(ErrorMessage = "Цена не может быть 0")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Display(Name = "Граммовка")]
@@ -52,6 +54,9 @@ namespace RestorauntMenu.Data.Models
         [Range(1, int.MaxValue)]
         [Required(ErrorMessage = "Время приготовления не может быть 0")]
         public int TimeToMake { get; set; }
+
+
+        
 
        
     }

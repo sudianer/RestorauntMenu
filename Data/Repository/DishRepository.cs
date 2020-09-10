@@ -17,7 +17,6 @@ namespace RestorauntMenu.Data.Repository
             AppDbContent = appContent;
         }
 
-
         public IEnumerable<Dish> Dishes => AppDbContent.Dish;
         public Dish GetDish(int DishId) => AppDbContent.Dish.FirstOrDefault(p => p.Id == DishId);
     }

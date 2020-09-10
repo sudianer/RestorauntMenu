@@ -7,7 +7,7 @@ using RestorauntMenu.Data.Interfaces;
 using RestorauntMenu.Data;
 using Microsoft.EntityFrameworkCore;
 using RestorauntMenu.Data.Models;
-using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Diagnostics.Eventing.Reader;
 
 namespace RestorauntMenu.Controllers
 {
@@ -115,16 +115,22 @@ namespace RestorauntMenu.Controllers
         /// <summary>
         /// Обновляет бд, добавляя новое блюдо
         /// </summary>
-        /// <param name="Dish"></param>
+        /// <param name="dish"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create(Dish Dish)
+        public async Task<IActionResult> Create(Dish dish)
         {
-            Dish.CreationDate = DateTime.Now;
-            _db.Dish.Attach(Dish);
-            _db.Dish.Add(Dish);
-            await _db.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+            if (IsTitleUnique(dish.Title, _db.Dish.ToList()))
+            {
+                dish.CreationDate = DateTime.Now;
+                _db.Dish.Attach(dish);
+                _db.Dish.Add(dish);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("Title","Такое имя уже существует");
+            return View();
         }
         /// <summary>
         /// Показывает форму с подробной информацией о блюде
@@ -153,7 +159,7 @@ namespace RestorauntMenu.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>  
-       
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -161,7 +167,7 @@ namespace RestorauntMenu.Controllers
                 Dish dish = await _db.Dish.FirstOrDefaultAsync(p => p.Id == id);
                 if (dish != null)
                 {                   
-                    return View(dish); //при передаче блюда в метод EditDish, сбрасывается дата-время
+                    return View(dish);
                 }
             }
             return NotFound();
@@ -173,12 +179,19 @@ namespace RestorauntMenu.Controllers
         /// <param name="dish"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> EditDish(Dish dish)
-        {
-            DateTime date = dish.CreationDate;
-            _db.Dish.Update(dish);         
-            await _db.SaveChangesAsync();
-            return RedirectToAction("Index");
+        public async Task<IActionResult> Edit(Dish dish)
+        {                     
+            List<Dish> dishes = _db.Dish.AsNoTracking().ToList();
+
+            if (IsTitleUnique(dish.Title, dishes) || IsTitleNotChanged(dish.Title, dish.Id, dishes))
+            {
+                _db.Dish.Update(dish);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            
+            ModelState.AddModelError("Title", "Такое имя уже существует");
+            return View(dish);
         }
 
         /// <summary>
@@ -206,16 +219,28 @@ namespace RestorauntMenu.Controllers
         /// </summary>
         /// <param name="title">Проверяемое название</param>
         /// <returns></returns>
-        public async Task<IActionResult> IsTitleUnique(string title, string prevAction,string nextAction)
+        private bool IsTitleUnique(string title, List<Dish> dishes)
         {
-            foreach(Dish dish in _db.Dish.ToList())
+            foreach(Dish dish in dishes)
             {
-                if (dish.Title == title)
+                if (dish.Title.Trim().ToLower() == title.Trim().ToLower())
                 {
-                    return RedirectToAction(prevAction);
+                    return false;
                 }
             }
-            return RedirectToAction(nextAction);
+            return true;
+        }
+
+        private bool IsTitleNotChanged(string title, int id, List<Dish> dishes)
+        {
+            foreach (Dish dish in dishes)
+            {
+                if (dish.Id == id && dish.Title.Trim().ToLower() == title.Trim().ToLower())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

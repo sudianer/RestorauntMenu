@@ -16,6 +16,16 @@ namespace RestorauntMenu.Data
             Database.EnsureCreated();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Dish>()
+                .HasIndex(t => t.Title)
+                .IsUnique()
+                .HasName("Index_title");
+
+            
+        }
+
 
        
     }
