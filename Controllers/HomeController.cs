@@ -22,7 +22,7 @@ namespace RestorauntMenu.Controllers
             _db = db;        
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber=1)
         {
             ViewData["CurrentFilter"] = searchString;
 
@@ -98,7 +98,21 @@ namespace RestorauntMenu.Controllers
                     break;
             }
 
-            return View(dishes);
+
+
+            int pageSize = 20;   // количество элементов на странице
+          
+            var count = await dishes.CountAsync();
+            IEnumerable<Dish> dishesPerPage = await dishes.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            PageViewModel pageViewModel = new PageViewModel(count, pageNumber, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                dishes = dishesPerPage
+            };
+
+            return View(viewModel);
         }
 
         //TODO: Валидация ввода при создании/изменении

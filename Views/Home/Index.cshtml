@@ -1,6 +1,7 @@
-﻿<h1>Family restoraunt</h1>
+﻿@using RestorauntMenu.Data.Helpers
+<h1>Family restoraunt</h1>
 <h3>Our menu</h3>
-@model IEnumerable<RestorauntMenu.Data.Models.Dish>
+@model RestorauntMenu.Data.Models.IndexViewModel
 @{
     ViewBag.Title = "Меню"; ;
 }
@@ -10,7 +11,7 @@
         <p>
             Поиск: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Искать" class="btn btn-default" /> |
-            <label>@Model.Count() Элемент(а\ов) из @ViewData["totalCount_dishes"]</label>
+            <label>@Model.dishes.Count() Элемент(а\ов) из @ViewData["totalCount_dishes"]</label>
         </p>
     </div>
 </form>
@@ -62,30 +63,32 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var dish in Model)
+        @foreach (var dish in Model.dishes)
         {
-        <tr>
-            <td nowrap>
-                <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Details.png" width="25" height="25"></a>|
-                <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Edit.png" width="25" height="25"></a>|
-                <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id" onclick="return confirm('Удалить?')">
-                    <img src="~/img/Delete.png" width="25" height="25">
-                </a>
+            <tr>
+                <td nowrap>
+                    <a asp-action="Details" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Details.png" width="25" height="25"></a>|
+                    <a asp-action="Edit" asp-controller="Home" asp-route-id="@dish.Id"><img src="~/img/Edit.png" width="25" height="25"></a>|
+                    <a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id" onclick="return confirm('Удалить?')">
+                        <img src="~/img/Delete.png" width="25" height="25">
+                    </a>
 
-                @*<a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id" onclick="return confirm("Удалить?")"><img src="~/img/Delete.png" width="25" height="25"></a>*@
-            </td>
-            <td>@dish.Id</td>
-            <td>@dish.CreationDate</td>
-            <td>@dish.Title</td>
-            <td>@dish.Ingredients</td>
-            <td>@dish.Description</td>
-            <td>@dish.Price</td>
-            <td>@dish.Weight</td>
-            <td>@(dish.Calories*dish.Weight/100)</td>
-            <td>@(dish.TimeToMake/60) час(а) @(dish.TimeToMake%60) минут</td>
+                    @*<a asp-action="Delete" asp-controller="Home" asp-route-id="@dish.Id" onclick="return confirm("Удалить?")"><img src="~/img/Delete.png" width="25" height="25"></a>*@
+                </td>
+                <td>@dish.Id</td>
+                <td>@dish.CreationDate</td>
+                <td>@dish.Title</td>
+                <td>@dish.Ingredients</td>
+                <td>@dish.Description</td>
+                <td>@dish.Price</td>
+                <td>@dish.Weight</td>
+                <td>@(dish.Calories*dish.Weight/100)</td>
+                <td>@(dish.TimeToMake/60) час(а) @(dish.TimeToMake%60) минут</td>
 
-        </tr>
+            </tr>
         }
     </tbody>
-</table>
-
+</table> 
+<div class="pages">
+    @PagingHelpers.PageLinks(Model.PageViewModel, x => Url.Action("Index", new { pageNumber = x }))
+</div>
