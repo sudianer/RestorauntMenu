@@ -22,7 +22,7 @@ namespace RestorauntMenu.Controllers
             _db = db;        
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber=1)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber=1, int pageSize=5)
         {
             ViewData["CurrentFilter"] = searchString;
 
@@ -98,10 +98,6 @@ namespace RestorauntMenu.Controllers
                     break;
             }
 
-
-
-            int pageSize = 20;   // количество элементов на странице
-          
             var count = await dishes.CountAsync();
             IEnumerable<Dish> dishesPerPage = await dishes.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 

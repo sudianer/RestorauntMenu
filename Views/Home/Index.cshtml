@@ -11,6 +11,7 @@
         <p>
             Поиск: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Искать" class="btn btn-default" /> |
+            <a asp-action="Index" asp-controller="Home">Очистить</a> |
             <label>@Model.dishes.Count() Элемент(а\ов) из @ViewData["totalCount_dishes"]</label>
         </p>
     </div>
@@ -92,3 +93,10 @@
 <div class="pages">
     @PagingHelpers.PageLinks(Model.PageViewModel, x => Url.Action("Index", new { pageNumber = x }))
 </div>
+<div>
+    <label>Кол-во блюд на странице</label>
+    <a asp-action="Index" asp-controller="Home" asp-route-pageSize="5">5</a> |
+    <a asp-action="Index" asp-controller="Home" asp-route-pageSize="10">10</a> |
+    <a asp-action="Index" asp-controller="Home" asp-route-pageSize="20">20</a> |
+</div>
+
