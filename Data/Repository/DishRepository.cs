@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using System.Collections.Generic;
 using RestorauntMenu.Data.Interfaces;
 using RestorauntMenu.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace RestorauntMenu.Data.Repository
 {

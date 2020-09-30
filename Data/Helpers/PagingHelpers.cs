@@ -1,9 +1,8 @@
-﻿using RestorauntMenu.Data.Models;
-using System;
-using System.Web;
+﻿using System;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.AspNetCore.Html;
+using RestorauntMenu.Data.Models;
 
 namespace RestorauntMenu.Data.Helpers
 {
@@ -12,11 +11,14 @@ namespace RestorauntMenu.Data.Helpers
         public static HtmlString PageLinks(PageViewModel pageInfo, Func<int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
+
             for (int i = 1; i <= pageInfo.TotalPages; i++)
             {
-                TagBuilder tag = new TagBuilder("a");
+                var tag = new TagBuilder("a");
+
                 tag.MergeAttribute("href", pageUrl(i));
                 tag.InnerHtml = i.ToString();
+
                 // если текущая страница, то выделяем ее,
                 // например, добавляя класс
                 if (i == pageInfo.PageNumber)
@@ -24,14 +26,14 @@ namespace RestorauntMenu.Data.Helpers
                     tag.AddCssClass("selected");
                     tag.AddCssClass("btn-primary");
                 }
+
                 tag.AddCssClass("btn btn-default");
                 result.Append(tag.ToString());
             }
+
             HtmlString htmlString = new HtmlString(result.ToString());
 
-
             return htmlString;
-                //MvcHtmlString.Create(result.ToString());
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RestorauntMenu.Data.Models;
 
 namespace RestorauntMenu.Data.Interfaces
@@ -12,7 +9,11 @@ namespace RestorauntMenu.Data.Interfaces
         /// <summary>
         /// Возвращает все блюда в списке
         /// </summary>
-        public IEnumerable<Dish> Dishes { get; }
+        public IEnumerable<Dish> Dishes
+        { 
+            get; 
+        }
+
         /// <summary>
         /// возвращает одно блюдо по Id
         /// </summary>

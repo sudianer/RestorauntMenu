@@ -1,24 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using RestorauntMenu.Data;
 using RestorauntMenu.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using RestorauntMenu.Data.Repository;
-using System.Configuration;
+
 
 namespace RestorauntMenu
 {
     public class Startup
     {
-        private IConfigurationRoot _confString;
+        private readonly IConfigurationRoot _confString;
 
         public Startup(IWebHostEnvironment hostEnv)
         {   
@@ -26,6 +20,7 @@ namespace RestorauntMenu
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
         public void ConfigureServices(IServiceCollection services)
         {
            
@@ -43,13 +38,10 @@ namespace RestorauntMenu
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-           
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                AppDbContext context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                DbObject.Initialize(context);
-            }
-            
-        }
+			using var scope = app.ApplicationServices.CreateScope();
+			AppDbContext context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+			DbObject.Initialize(context);
+
+		}
     }
 }
