@@ -65,7 +65,7 @@ namespace RestorauntMenu.Controllers
 			IndexViewModel viewModel = new IndexViewModel
 			{
 				PageViewModel = pageViewModel,
-				Dishes = dishesPerPage
+				dishes = dishesPerPage
 			};
 
 			return View(viewModel);

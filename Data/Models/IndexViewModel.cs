@@ -4,7 +4,8 @@ namespace RestorauntMenu.Data.Models
 {
     public class IndexViewModel
     {
-        public IEnumerable<Dish> Dishes { get; set; }
+        public IEnumerable<Dish> dishes { get; set; }
+
         public PageViewModel PageViewModel { get; set; }
     }
 }
